@@ -5,8 +5,6 @@ import { ThemeProvider } from 'styled-components';
 import Home from './src/screem/Home/Index';
 import theme from './src/styles/theme';
 
-import AppLoading from 'expo-app-loading';
-
 import {
   useFonts,
   Inter_400Regular,
@@ -30,7 +28,7 @@ export default function App() {
   });
 
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return <></>;
   };
 
   return (
