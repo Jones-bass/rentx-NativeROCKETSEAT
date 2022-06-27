@@ -1,24 +1,76 @@
-import React from 'react';
-import { BackButton } from '../../components/BackButton';
-import { ImageSlider } from '../../components/ImageSlider';
+import React from "react";
+import { Accessory } from "../../components/Accessory";
+import { BackButton } from "../../components/BackButton";
+import { ImageSlider } from "../../components/ImageSlider";
+
+import speedSvg from '../../assets/speed.svg';
+import accelerationSvg from '../../assets/acceleration.svg';
+import forceSvg from '../../assets/force.svg';
+import gasolinaSvg from '../../assets/gasoline.svg';
+import exchangeSvg from '../../assets/exchange.svg';
+import peopleSvg from '../../assets/people.svg';
 
 import {
-    Container,
-    Header,
-    CarImages
-} from './styles';
+  Container,
+  Header,
+  CarImages,
+  Content,
+  Details,
+  Description,
+  Brand,
+  Name,
+  Price,
+  Rent,
+  About,
+  Accessories,
+  Period,
+} from "./styles";
 
 export function CarDetails() {
-    return (
-        <Container>
-            <Header>
-                <BackButton onPress={() => {}} />
-                <CarImages>
-                <ImageSlider imagesUrl={['https://th.bing.com/th/id/R.d8ca7b070e5cf45c252309e8bc045327?rik=Cb1Tblaqu4JStw&riu=http%3a%2f%2fwww.pngpix.com%2fwp-content%2fuploads%2f2016%2f02%2fYellow-Audi-car-PNG-Image.png&ehk=AYN%2fTnjKy1TRnvlsyKGA1yxf9UfHRUS7wvn9Jz%2fa2tE%3d&risl=&pid=ImgRaw&r=0.png']}/>
-                </CarImages>
-            </Header>
-        </Container>
-    );
-};
+  return (
+    <Container>
+      <Header>
+        <BackButton onPress={() => {}} />
+      </Header>
 
-//  
+      <CarImages>
+        <ImageSlider
+          imagesUrl={[
+            "https://m.media-amazon.com/images/I/61Omh8nwEIL._AC_SL1305_.jpg",
+          ]}
+        />
+      </CarImages>
+
+      <Content>
+        <Details>
+          <Description>
+            <Brand>Lamborghini</Brand>
+            <Name>Huracan</Name>
+          </Description>
+
+          <Rent>
+            <Period>15 de junho</Period>
+            <Price>R$ 580</Price>
+          </Rent>
+
+        </Details>
+        <Accessories>
+          <Accessory name="380km/h" icon={speedSvg}/>
+          <Accessory name="3.2s" icon={accelerationSvg}/>
+          <Accessory name="Force" icon={forceSvg}/>
+          <Accessory name="Gasolina" icon={gasolinaSvg}/>
+          <Accessory name="Auto" icon={exchangeSvg}/>
+          <Accessory name="2 Pessoas" icon={peopleSvg}/>
+        </Accessories>
+
+        <About>
+          Este é um automovel desportivo. Surgiu do lendário touro de lide
+          indulpado na praça Real Maestranza de Sevilla. é um belissimo carro
+          para quem gosta de acelerar.
+        </About>
+      </Content>
+    </Container>
+  );
+}
+
+//
