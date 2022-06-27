@@ -24,13 +24,15 @@ import {
   About,
   Accessories,
   Period,
+  Footer
 } from "./styles";
+import { Button } from "../../components/Button";
 
 export function CarDetails() {
   return (
     <Container>
       <Header>
-        <BackButton onPress={() => {}} />
+        <BackButton onPress={() => { }} />
       </Header>
 
       <CarImages>
@@ -55,12 +57,12 @@ export function CarDetails() {
 
         </Details>
         <Accessories>
-          <Accessory name="380km/h" icon={speedSvg}/>
-          <Accessory name="3.2s" icon={accelerationSvg}/>
-          <Accessory name="Force" icon={forceSvg}/>
-          <Accessory name="Gasolina" icon={gasolinaSvg}/>
-          <Accessory name="Auto" icon={exchangeSvg}/>
-          <Accessory name="2 Pessoas" icon={peopleSvg}/>
+          <Accessory name="380km/h" icon={speedSvg} />
+          <Accessory name="3.2s" icon={accelerationSvg} />
+          <Accessory name="Force" icon={forceSvg} />
+          <Accessory name="Gasolina" icon={gasolinaSvg} />
+          <Accessory name="Auto" icon={exchangeSvg} />
+          <Accessory name="2 Pessoas" icon={peopleSvg} />
         </Accessories>
 
         <About>
@@ -69,6 +71,11 @@ export function CarDetails() {
           para quem gosta de acelerar.
         </About>
       </Content>
+
+      <Footer>
+        <Button title="Confirmar"/>
+      </Footer>
+
     </Container>
   );
 }

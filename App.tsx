@@ -2,7 +2,6 @@ import React from 'react';
 
 import { ThemeProvider } from 'styled-components';
 
-import Home from './src/screem/Home/Index';
 import theme from './src/styles/theme';
 
 import {
@@ -16,7 +15,7 @@ import {
   Archivo_500Medium,
   Archivo_600SemiBold
 } from '@expo-google-fonts/archivo';
-import { CarDetails } from './src/screem/CarDetails';
+import { Scheduling } from './src/screem/Scheduling';
 
 
 export default function App() {
@@ -34,7 +33,7 @@ export default function App() {
 
   return (
       <ThemeProvider theme={theme}>
-        <CarDetails />
+        <Scheduling/>
       </ThemeProvider>
   );
 }
