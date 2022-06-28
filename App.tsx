@@ -16,7 +16,7 @@ import {
   Archivo_600SemiBold
 } from '@expo-google-fonts/archivo';
 
-import { SchedulingDetails } from './src/screem/SchedulingDetails';
+import { Confirmation } from './src/screens/Confirmation';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -33,7 +33,7 @@ export default function App() {
 
   return (
       <ThemeProvider theme={theme}>
-        <SchedulingDetails/>
+        <Confirmation/>
       </ThemeProvider>
   );
 }
