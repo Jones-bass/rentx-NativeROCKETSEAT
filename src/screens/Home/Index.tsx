@@ -15,19 +15,8 @@ export function Home() {
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
 
-  const CarData = {
-    brand: "Audi",
-    name: "R$ 5 Coute",
-    rent: {
-      period: "Ao Dia",
-      price: 120,
-    },
-    thumbnail:
-      "https://th.bing.com/th/id/R.d8ca7b070e5cf45c252309e8bc045327?rik=Cb1Tblaqu4JStw&riu=http%3a%2f%2fwww.pngpix.com%2fwp-content%2fuploads%2f2016%2f02%2fYellow-Audi-car-PNG-Image.png&ehk=AYN%2fTnjKy1TRnvlsyKGA1yxf9UfHRUS7wvn9Jz%2fa2tE%3d&risl=&pid=ImgRaw&r=0.png",
-  };
-
-  function handleCarDetails() {
-    navigation.navigate("CarDetails");
+  function handleCarDetails(car: CarDTO) {
+    navigation.navigate('CarDetails', { car });
   }
 
   useEffect(() => {
@@ -63,7 +52,7 @@ export function Home() {
           data={cars}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <Car data={item} onPress={handleCarDetails} />
+            <Car data={item} onPress={() => handleCarDetails(item)} />
           )}
         />
       }
