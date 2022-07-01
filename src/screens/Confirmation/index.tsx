@@ -20,7 +20,7 @@ export function Confirmation(){
 
   const navigation = useNavigation();
 
-  function handleConfirmRental() {
+  function handleConfirm() {
     navigation.navigate("Home");
   }
 
@@ -46,7 +46,7 @@ export function Confirmation(){
       </Content>
 
       <Footer>
-        <ConfirmButton title='OK' onPress={handleConfirmRental}/>
+        <ConfirmButton title='OK' onPress={handleConfirm}/>
       </Footer>
     </Container>
   );

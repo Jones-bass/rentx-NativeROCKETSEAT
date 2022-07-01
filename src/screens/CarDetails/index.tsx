@@ -5,6 +5,7 @@ import { getAccessoryIcon } from "../../utils/getAccessoryIcon";
 import { Accessory } from "../../components/Accessory";
 import { BackButton } from "../../components/BackButton";
 import { ImageSlider } from "../../components/ImageSlider";
+import { Button } from "../../components/Button";
 
 import {
   Container,
@@ -22,7 +23,6 @@ import {
   Period,
   Footer
 } from "./styles";
-import { Button } from "../../components/Button";
 import { CarDTO } from "../../dtos/CarDTO";
 
 interface Params {
@@ -35,8 +35,8 @@ export function CarDetails() {
   const route = useRoute();
   const { car } = route.params as Params;
 
-  function handleConfirmRental() {
-    navigation.navigate('Scheduling')    
+  function handleConfirmRental(car: CarDTO) {
+    navigation.navigate('Scheduling', { car })    
   }
 
   function handleBack() {
@@ -52,7 +52,7 @@ export function CarDetails() {
       <CarImages>
         <ImageSlider
           imagesUrl={car.photos}
-        />
+          />
       </CarImages>
 
       <Content>
@@ -80,7 +80,7 @@ export function CarDetails() {
         </Accessories>
 
         <About>{car.about}</About>
-      </Content>r
+      </Content>
 
       <Footer>
         <Button title="Escolher período do aluguel!" onPress={handleConfirmRental}/>
@@ -90,4 +90,3 @@ export function CarDetails() {
   );
 }
 
-//
