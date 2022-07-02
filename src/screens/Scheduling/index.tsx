@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { Alert, StatusBar } from "react-native";
 import { useTheme } from "styled-components";
+import { format } from "date-fns";
+import { getPlatformDate } from "../../utils/getPlatformDate";
+import { CarDTO } from "../../dtos/CarDTO";
 
 import ArrowSvg from "../../assets/arrow.svg";
 import { BackButton } from "../../components/BackButton";
 import { Button } from "../../components/Button";
-import { getPlatformDate } from "../../utils/getPlatformDate";
+
 import {
   Calendar,
   DayProps,
@@ -25,34 +28,36 @@ import {
   Content,
   DateValue,
 } from "./styles";
-import { format } from "date-fns";
+
 
 interface RentalPeriod {
   startFormatted: string;
-  start: number;
   endFormatted: string;
-  end: number;
+}
+
+interface Params {
+  car: CarDTO;
 }
 
 export function Scheduling() {
-  const [lastSelectedDate, setLastSelectedDate] = useState<DayProps>(
-    {} as DayProps
-  ); //ultima da ta selecionada
-  const [markedDates, setMarkedDates] = useState<MarkedDateProps>(
-    {} as MarkedDateProps
-  );
-  const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>(
-    {} as RentalPeriod
-  );
+  const [lastSelectedDate, setLastSelectedDate] = useState<DayProps>({} as DayProps); //ultima da ta selecionada
+  const [markedDates, setMarkedDates] = useState<MarkedDateProps>({} as MarkedDateProps);
+  const [rentalPeriod, setRentalPeriod] = useState<RentalPeriod>({} as RentalPeriod);
 
   const theme = useTheme();
   const navigation = useNavigation();
+  
+  const route = useRoute();
+  const { car } = route.params as Params;
 
   function handleConfirmRental() {
-    if (!rentalPeriod.start || !rentalPeriod.end) {
+    if (!rentalPeriod.startFormatted || !rentalPeriod.endFormatted) {
       Alert.alert('Selecione o intervalo para alugar.');
     } else {
-      navigation.navigate("SchedulingDetails");
+      navigation.navigate('SchedulingDetails', {
+        car,
+        dates: Object.keys(markedDates)
+    });
     }
   }
 

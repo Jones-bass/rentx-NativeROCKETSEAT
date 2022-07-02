@@ -35,7 +35,7 @@ export function CarDetails() {
   const route = useRoute();
   const { car } = route.params as Params;
 
-  function handleConfirmRental(car: CarDTO) {
+  function handleConfirmRental() {
     navigation.navigate('Scheduling', { car })    
   }
 
