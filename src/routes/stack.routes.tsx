@@ -11,34 +11,37 @@ import { Splash } from '../screens/Splash';
 
 const { Navigator, Screen } = createStackNavigator();
 
-export function StackRoutes(){
-  return(
-    <Navigator screenOptions={{ headerShown: false }} initialRouteName="Splash">      
-      <Screen 
+export function StackRoutes() {
+  return (
+    <Navigator screenOptions={{ headerShown: false }} initialRouteName="Splash">
+      <Screen
         name="Splash"
         component={Splash}
-      /> 
-       <Screen 
+      />
+      <Screen
         name="Home"
         component={Home}
-      />     
-      <Screen 
+        options={{
+          gestureEnabled: false,
+        }}
+      />
+      <Screen
         name="CarDetails"
         component={CarDetails}
       />
-      <Screen 
+      <Screen
         name="Scheduling"
         component={Scheduling}
       />
-      <Screen 
+      <Screen
         name="SchedulingDetails"
         component={SchedulingDetails}
       />
-      <Screen 
+      <Screen
         name="Confirmation"
         component={Confirmation}
       />
-        <Screen 
+      <Screen
         name="MyCars"
         component={MyCars}
       />
