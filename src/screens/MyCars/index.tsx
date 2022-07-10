@@ -3,9 +3,9 @@ import { StatusBar, FlatList } from 'react-native';
 import { useTheme } from 'styled-components';
 import { useNavigation } from '@react-navigation/core';
 import { AntDesign } from '@expo/vector-icons';
-import { LoadingAnimated } from '../../components/LoadingAnimated';
 
 import { BackButton } from '../../components/BackButton';
+import { Load } from '../../components/Load';
 
 import { Car } from '../../components/Car';
 import { CarDTO } from '../../dtos/CarDTO';
@@ -85,7 +85,7 @@ export function MyCars() {
       </Header>
 
       {
-        loading ? <LoadingAnimated /> :
+        loading ? <Load /> :
           <Content>
             <Appointments>
               <AppointmentsTitle>Agendamentos feitos</AppointmentsTitle>

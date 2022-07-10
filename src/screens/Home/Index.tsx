@@ -6,7 +6,6 @@ import { Ionicons } from '@expo/vector-icons'
 
 import { RFValue } from "react-native-responsive-fontsize";
 import Logo from "../../assets/logo.svg";
-import { LoadingAnimated } from "../../components/LoadingAnimated";
 import { Car } from "../../components/Car";
 import { PanGestureHandler, RectButton } from "react-native-gesture-handler";
 
@@ -22,6 +21,7 @@ import Animated,
   useSharedValue,
   withSpring
 } from "react-native-reanimated";
+import { Load } from "../../components/Load";
 
 const MyCarButtonAnimated = Animated.createAnimatedComponent(RectButton);
 
@@ -104,7 +104,7 @@ export function Home() {
         </HeaderContent>
       </Header>
 
-      {loading ? <LoadingAnimated /> :
+      {loading ? <Load /> :
         <CarList
           data={cars}
           keyExtractor={item => item.id}
