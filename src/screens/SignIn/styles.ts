@@ -23,7 +23,7 @@ export const Title = styled.Text`
     font-size: ${RFValue(40)}px;
     line-height: ${RFValue(43.52)}px;
 
-    color: ${({theme}) => theme.colors.title_light};
+    color: ${({theme}) => theme.colors.title};
 `;
 
 export const Description = styled.Text`

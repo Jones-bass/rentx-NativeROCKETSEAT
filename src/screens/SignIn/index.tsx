@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Keyboard, KeyboardAvoidingView, Platform, StatusBar, TouchableWithoutFeedback, View } from 'react-native';
+import * as Yup from 'yup';
+
+import { Alert, Keyboard, KeyboardAvoidingView, Platform, StatusBar, TouchableWithoutFeedback, View } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useTheme } from 'styled-components/native';
 
@@ -8,14 +10,38 @@ import { BackButton } from '../../components/BackButton';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import { PasswordInput } from '../../components/PasswordInput';
+import { useNavigation } from '@react-navigation/native';
 
 export function SignIn() {
   const theme = useTheme();
+  const { navigate } = useNavigation<any>();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
 
+  function handleSignUp() {
+    navigate('SignUpFirstStep');
+  }
+
+  async function handleSignIn() { //fazer login
+    const schema = Yup.object().shape({
+      password: Yup.string().required('Senha é obrigatória'),
+      email: Yup.string().email('Digite um email válido').required('E-mail é obrigatório.'),
+    });
+
+    try {
+      await schema.validate({ email, password });
+      Alert.alert('Sucesso ✅', 'Login realizado com sucesso');
+      navigate('Home');
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        Alert.alert('Opa 🚫', error.message);
+      } else {
+        Alert.alert('Erro na autenticação', 'Tente novamente');
+      }
+    }
+  }
 
   return (
     <KeyboardAvoidingView behavior='position' enabled>
@@ -66,18 +92,20 @@ export function SignIn() {
 
           <Footer>
             <Button
-            title='Login'
-            onPress={()=> {}}
-            enabled={false}
-            loading={false}/>
-            <Button
-            title='Criar Conta'
-            color={theme.colors.background_secondary}
-            light
-            onPress={()=> {}}
-            enabled={true}
-            loading={false}/>
+              title='Login'
+              onPress={handleSignIn}
+              enabled={true}
+              loading={false}
+            />
 
+            <Button
+              title='Criar Conta'
+              color={theme.colors.background_secondary}
+              light
+              onPress={handleSignUp}
+              enabled={true}
+              loading={false}
+              />
           </Footer>
         </View>
       </TouchableWithoutFeedback>

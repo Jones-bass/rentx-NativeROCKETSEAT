@@ -8,13 +8,12 @@ import { Container, Title } from "./styles";
 interface Props extends RectButtonProps{
   title: string;
   color?: string;
-  onPress: () => void;
   loading?: boolean;
-  enabled?: boolean;
   light?: boolean;
 }
 
-export function Button({ title, color, onPress, light = false, loading = false, enabled = true }: Props) {
+export function Button({ title, color, onPress, 
+  light = false, loading = false, enabled = true }: Props) {
   const theme = useTheme();
 
   return (
