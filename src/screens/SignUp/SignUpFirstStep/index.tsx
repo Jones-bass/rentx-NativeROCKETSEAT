@@ -17,6 +17,8 @@ import {
   Subtitle,
   Title,
 } from './styles';
+import { Bullet } from '../../../components/Bullet';
+import { Button } from '../../../components/Button';
 
 export function SignUpFirstStep() {
   const { navigate } = useNavigation<any>();
@@ -49,7 +51,7 @@ export function SignUpFirstStep() {
     }
   }
 
-  useEffect(() => {
+   useEffect(() => {
     const keyboardDidHideListener = Keyboard.addListener('keyboardDidShow', () => {
       setIsKeyboardVisible(true);
     });
@@ -77,9 +79,9 @@ export function SignUpFirstStep() {
           <View>
             <Header>
               <NavBarContainer>
-                <BackButton />
+                <BackButton/>
                 <Steps>
-               
+                  <Bullet active />
                 </Steps>
               </NavBarContainer>
               {!isKeyboardVisible ? (
@@ -119,10 +121,17 @@ export function SignUpFirstStep() {
 
               <InputDivisor />
 
-              <Input iconName="credit-card" keyboardType="numeric" onChangeText={setCNH} placeholder="CNH" />
+              <Input 
+                iconName="credit-card" 
+                keyboardType="numeric" 
+                onChangeText={setCNH} 
+                placeholder="CNH" 
+                />
             </Form>
 
             <Footer>
+              <Button title="Próximo" onPress={handleSignUo} 
+              />
             </Footer>
           </View>
         </TouchableWithoutFeedback>

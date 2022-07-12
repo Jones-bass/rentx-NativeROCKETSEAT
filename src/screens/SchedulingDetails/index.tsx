@@ -12,7 +12,6 @@ import { CarDTO } from "../../dtos/CarDTO";
 import { getAccessoryIcon } from "../../utils/getAccessoryIcon";
 import { getPlatformDate } from "../../utils/getPlatformDate";
 import { Accessory } from "../../components/Accessory";
-import { BackButton } from "../../components/BackButton";
 import { ImageSlider } from "../../components/ImageSlider";
 
 
@@ -91,11 +90,6 @@ export function SchedulingDetails() {
     })
   }
   
-
-  function handleBack() {
-    navigation.goBack();
-  }
-
   useEffect(() => {
     setRentalPeriod({
       start: format(getPlatformDate(new Date(dates[0])), 'dd/MM/yyyy'),
@@ -106,7 +100,6 @@ export function SchedulingDetails() {
   return (
     <Container>
       <Header>
-        <BackButton onPress={handleBack} />
       </Header>
 
       <CarImages>

@@ -77,10 +77,6 @@ export function CarDetails() {
     navigation.navigate('Scheduling', { car })
   }
 
-  function handleBack() {
-    navigation.goBack();
-  }
-
   return (
     <Container>
       <StatusBar
@@ -97,7 +93,7 @@ export function CarDetails() {
         ]}
       >
         <Header>
-          <BackButton onPress={handleBack} />
+          <BackButton/>
         </Header>
 
         <Animated.View style={sliderCarsStyleAnimation}>

@@ -57,10 +57,6 @@ export function Scheduling() {
     });
   }
 
-  function handleBack() {
-    navigation.goBack();
-  }
-
   function handleChangeDate(date: DayProps) {
     let start = !lastSelectedDate.timestamp ? date : lastSelectedDate;
     let end = date;
@@ -94,7 +90,7 @@ export function Scheduling() {
         translucent
       />
       <Header>
-        <BackButton onPress={handleBack} color={theme.colors.shape} />
+        <BackButton/>
         <Title>
           Escolha uma{"\n"}
           data de início e{"\n"}
