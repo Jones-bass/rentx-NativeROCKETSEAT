@@ -89,8 +89,10 @@ export const RentalPeriod = styled.View`
     width: 100%;
     flex-direction: row;
     justify-content: space-between;
+    
     align-items: center;
     margin-top: 40px;
+
     border-bottom-width: 1px;
     border-bottom-color: ${({ theme }) => theme.colors.line};
     padding-bottom: 16px;
@@ -133,6 +135,7 @@ export const RentalPriceLabel = styled.Text`
 `;
 
 export const RentalPriceDetails = styled.View`
+    width: 100%;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;        

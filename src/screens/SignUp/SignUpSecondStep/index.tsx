@@ -1,4 +1,4 @@
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { Alert, Keyboard, Platform, TouchableWithoutFeedback, View } from 'react-native';
 import { useTheme } from 'styled-components';
@@ -33,6 +33,8 @@ export function SignUpSecondStep() {
   const { user } = route.params as Params;
   const theme = useTheme();
 
+  const navigation = useNavigation();
+
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
 
@@ -44,6 +46,11 @@ export function SignUpSecondStep() {
     if (password !== passwordConfirm) {
       Alert.alert('Erro ❌', 'As senhas não são iguais');
     }
+    navigation.navigate('Confirmation', {
+      nextScreenRoute: 'SignIn',
+      title: 'Conta Criada!',
+      message: `Agora só fazer login\ne aproveitar`,
+    });
   }
 
   return (

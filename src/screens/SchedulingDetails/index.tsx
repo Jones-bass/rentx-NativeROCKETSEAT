@@ -78,17 +78,23 @@ export function SchedulingDetails() {
       endDate: format(getPlatformDate(new Date(dates[dates.length - 1])), 'dd/MM/yyyy')
     })
 
-    api.put(`/schedules_bycars/${car.id}`, {
+    api
+    .put(`/schedules_bycars/${car.id}`, {
       id: car.id,
-      unavailable_dates
+      unavailable_dates,
     })
-    
-    .then(() => navigation.navigate('Confirmation'))
+    .then(() =>
+      navigation.navigate('Confirmation', {
+        nextScreenRoute: 'Home',
+        title: 'Carro alugado!',
+        message: `Agora você só precisa ir\naté a concessionária da RENTX\npegar o seu automóvel.`,
+      }),
+    )
     .catch(() => {
+      Alert.alert('Não foi possível confirmar o agendamento');
       setLoading(false);
-      Alert.alert('Não foi possível confirmar o agendamento.')
-    })
-  }
+    });
+}
   
   useEffect(() => {
     setRentalPeriod({
