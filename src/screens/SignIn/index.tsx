@@ -11,6 +11,7 @@ import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import { PasswordInput } from '../../components/PasswordInput';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../../hooks/auth';
 
 export function SignIn() {
   const theme = useTheme();
@@ -19,21 +20,23 @@ export function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
+  const { signIn } = useAuth();
 
   function handleSignUp() {
     navigate('SignUpFirstStep');
   }
 
   async function handleSignIn() { //fazer login
-    const schema = Yup.object().shape({
+    try {
+      const schema = Yup.object().shape({
       password: Yup.string().required('Senha é obrigatória'),
       email: Yup.string().email('Digite um email válido').required('E-mail é obrigatório.'),
     });
-
-    try {
+   
       await schema.validate({ email, password });
       Alert.alert('Sucesso ✅', 'Login realizado com sucesso');
-      navigate('Home');
+
+      signIn({ email, password});
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert('Opa 🚫', error.message);

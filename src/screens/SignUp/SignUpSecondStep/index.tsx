@@ -6,6 +6,7 @@ import { BackButton } from '../../../components/BackButton';
 import { Bullet } from '../../../components/Bullet';
 import { Button } from '../../../components/Button';
 import { PasswordInput } from '../../../components/PasswordInput';
+import { api } from '../../../services/api';
 
 import {
   Container,
@@ -38,7 +39,7 @@ export function SignUpSecondStep() {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
 
-  function hadleRegister() {
+  async function hadleRegister() {
     if (!password || !passwordConfirm) {
       Alert.alert('Atenção❗', 'Preencha todos os campos');
     }
@@ -46,11 +47,23 @@ export function SignUpSecondStep() {
     if (password !== passwordConfirm) {
       Alert.alert('Erro ❌', 'As senhas não são iguais');
     }
-    navigation.navigate('Confirmation', {
-      nextScreenRoute: 'SignIn',
-      title: 'Conta Criada!',
-      message: `Agora só fazer login\ne aproveitar`,
-    });
+
+    await api.post('/users', {
+      name: user.name,
+      email: user.email,
+      driver_license: user.cnh,
+      password,
+    })
+    .then(() => {
+      navigation.navigate('Confirmation', {
+        nextScreenRoute: 'SignIn',
+        title: 'Conta Criada!',
+        message: `Agora só fazer login\ne aproveitar`,
+      });
+    })
+    .catch(() => {
+      Alert.alert('Opa', 'Não foi possivel cadastrar')
+    });   
   }
 
   return (

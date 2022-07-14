@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
 import { Alert, Keyboard, Platform, ScrollView, TouchableWithoutFeedback, View } from 'react-native';
+
 import { BackButton } from '../../../components/BackButton';
 import { Input } from '../../../components/Input';
+import { Bullet } from '../../../components/Bullet';
+import { Button } from '../../../components/Button';
 
 import {
   Container,
@@ -17,36 +20,40 @@ import {
   Subtitle,
   Title,
 } from './styles';
-import { Bullet } from '../../../components/Bullet';
-import { Button } from '../../../components/Button';
+
 
 export function SignUpFirstStep() {
-  const { navigate } = useNavigation<any>();
-
-  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
-
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [cnh, setCNH] = useState('');
+  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
 
-  const schema = Yup.object().shape({
-    cnh: Yup.string().required('CNH é obrigatório'),
-    email: Yup.string().required('Email é obrigatório').email('Email inválido'),
-    name: Yup.string().required('Nome é obrigatório'),
-  });
+  const navigation = useNavigation();
 
-  async function handleSignUo() {
-    const data = { name, email, cnh };
-
+   async function handleSignUo() {
     try {
+      const schema = Yup.object().shape({
+        cnh: Yup.string().required('CNH é obrigatório'),
+
+        email: Yup.string()
+          .required('E-mail obrigatório')
+          .email('Digite um e-mail válido'),
+
+        name: Yup.string().required('Nome é obrigatório'),
+      });
+
+      const data = { name, email, cnh };
       await schema.validate(data);
-      Alert.alert('Sucesso ✅', 'Cadastro realizado com sucesso');
-      navigate('SignUpSecondStep', { user: data });
+
+      navigation.navigate('SignUpSecondStep', { user: data });
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
-        Alert.alert('Erro ❌', error.message);
+        Alert.alert('Opa', error.message);
       } else {
-        Alert.alert('Erro ❌', 'Ocorreu um erro ao realizar o cadastro');
+        Alert.alert(
+          'Erro no cadastro',
+          'Ocorreu um erro ao fazer o cadastro, verifique o preenchimento dos campos',
+        );
       }
     }
   }
