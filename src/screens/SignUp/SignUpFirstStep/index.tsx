@@ -30,7 +30,7 @@ export function SignUpFirstStep() {
 
   const navigation = useNavigation();
 
-   async function handleSignUo() {
+   async function handleNextStep() {
     try {
       const schema = Yup.object().shape({
         cnh: Yup.string().required('CNH é obrigatório'),
@@ -137,7 +137,7 @@ export function SignUpFirstStep() {
             </Form>
 
             <Footer>
-              <Button title="Próximo" onPress={handleSignUo} 
+              <Button title="Próximo" onPress={handleNextStep} 
               />
             </Footer>
           </View>
