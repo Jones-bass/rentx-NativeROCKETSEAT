@@ -1,3 +1,4 @@
+import { Category } from "../model/Category";
 
 export interface ICreateCategoriesDTO {
   name: string;
@@ -5,6 +6,8 @@ export interface ICreateCategoriesDTO {
 }
 
 export interface ICategoriesRepository {
+  findByName( name: string ): Category;
   create({ description, name }: ICreateCategoriesDTO): void;
+  list(): Category[];
 }
 
