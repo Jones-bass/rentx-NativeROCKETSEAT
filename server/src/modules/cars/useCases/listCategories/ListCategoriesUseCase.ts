@@ -1,13 +1,12 @@
-import { Category } from "@modules/cars/model/Category";
-import { ICategoriesRepository } from "@modules/cars/repositories/ICategoriesRepository";
+import { Category } from '@modules/cars/model/Category'
+import { ICategoriesRepository } from '@modules/cars/repositories/ICategoriesRepository'
 
 export class ListCategoriesUseCase {
-  constructor( private categoriesRepository: ICategoriesRepository) {}
+  constructor(private categoriesRepository: ICategoriesRepository) {}
 
   execute(): Category[] {
-    const categories = this.categoriesRepository.list();
+    const categories = this.categoriesRepository.list()
 
-    return categories;
+    return categories
   }
 }
-

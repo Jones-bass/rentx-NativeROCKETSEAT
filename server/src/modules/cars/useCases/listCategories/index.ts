@@ -1,9 +1,11 @@
-import { CategoriesRepository } from "@modules/cars/repositories/CategoriesRepository";
-import { ListCategoriesUseCase } from "./ListCategoriesUseCase";
-import { ListCategoriesController } from "./ListCategoriesController";
+import { CategoriesRepository } from '@modules/cars/repositories/CategoriesRepository'
+import { ListCategoriesUseCase } from './ListCategoriesUseCase'
+import { ListCategoriesController } from './ListCategoriesController'
 
 const categoriesRepository = CategoriesRepository.getInstance()
-const listCategoriesUseCase = new ListCategoriesUseCase(categoriesRepository);
-const listCategoriesController = new ListCategoriesController(listCategoriesUseCase);
+const listCategoriesUseCase = new ListCategoriesUseCase(categoriesRepository)
+const listCategoriesController = new ListCategoriesController(
+  listCategoriesUseCase,
+)
 
 export { listCategoriesController }

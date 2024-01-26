@@ -1,40 +1,44 @@
-import { Category } from "../model/Category";
-import { ICategoriesRepository, ICreateCategoriesDTO } from "./ICategoriesRepository";
+/* eslint-disable no-use-before-define */
+import { Category } from '../model/Category'
+import {
+  ICategoriesRepository,
+  ICreateCategoriesDTO,
+} from './ICategoriesRepository'
 
-export class CategoriesRepository implements ICategoriesRepository{
-  private categories: Category[];
+export class CategoriesRepository implements ICategoriesRepository {
+  private categories: Category[]
 
   private static INSTANCE: CategoriesRepository
 
   private constructor() {
-    this.categories = [];
+    this.categories = []
   }
 
-  public static getInstance(): CategoriesRepository  {
-    if(!CategoriesRepository.INSTANCE) {
+  public static getInstance(): CategoriesRepository {
+    if (!CategoriesRepository.INSTANCE) {
       CategoriesRepository.INSTANCE = new CategoriesRepository()
     }
     return CategoriesRepository.INSTANCE
   }
 
   create({ description, name }: ICreateCategoriesDTO): void {
-    const category = new Category();
+    const category = new Category()
 
     Object.assign(category, {
       name,
       description,
       created_at: new Date(),
-    });
+    })
 
-    this.categories.push(category);
+    this.categories.push(category)
   }
 
   list(): Category[] {
-    return this.categories;
+    return this.categories
   }
 
   findByName(name: string): Category {
-    const category = this.categories.find((category) => category.name === name);
-    return category;
+    const category = this.categories.find((category) => category.name === name)
+    return category
   }
 }
