@@ -6,6 +6,7 @@ export interface ICreateCategoriesDTO {
 }
 
 export interface ICategoriesRepository {
+  findByName(name: string): Promise<Category>
   create({ description, name }: ICreateCategoriesDTO): Promise<void>
   list(): Promise<Category[]>
 }

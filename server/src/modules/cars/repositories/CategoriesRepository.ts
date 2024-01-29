@@ -1,11 +1,12 @@
 /* eslint-disable no-use-before-define */
 import { Repository } from 'typeorm'
 import { Category } from '../entities/Category'
+
+import { AppDataSource } from 'data-source'
 import {
   ICategoriesRepository,
   ICreateCategoriesDTO,
-} from './ICategoriesRepository'
-import { AppDataSource } from 'data-source'
+} from '../dtos/ICategoriesRepository'
 
 export class CategoriesRepository implements ICategoriesRepository {
   private repository: Repository<Category>
