@@ -15,9 +15,6 @@ export class User {
   name: string
 
   @Column({ type: 'text' })
-  username: string
-
-  @Column({ type: 'text' })
   email: string
 
   @Column({ type: 'text' })
@@ -28,6 +25,9 @@ export class User {
 
   @Column({ type: 'boolean' })
   isAdmin: boolean
+
+  @Column({ type: 'text' })
+  avatar: string
 
   @CreateDateColumn()
   created_at: Date

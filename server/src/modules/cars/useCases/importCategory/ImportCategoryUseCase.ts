@@ -3,6 +3,7 @@ import { Parser } from 'csv-parse'
 
 import fs from 'fs'
 import { ICategoriesRepository } from '@modules/cars/dtos/ICategoriesRepository'
+import { AppError } from '@shared/errors/AppError'
 
 interface IImportCategory {
   name: string
@@ -34,7 +35,6 @@ export class ImportCategoryUseCase {
             name,
             description,
           })
-          console.error('CSV file:', line)
         })
 
         .on('end', () => {
@@ -51,17 +51,19 @@ export class ImportCategoryUseCase {
   async execute(file: Express.Multer.File): Promise<void> {
     const categories = await this.loadCategories(file)
 
-    categories.map(async (category) => {
+    for (const category of categories) {
       const { name, description } = category
 
       const existCategory = await this.categoriesRepository.findByName(name)
 
-      if (!existCategory) {
-        await this.categoriesRepository.create({
-          name,
-          description,
-        })
+      if (existCategory) {
+        throw new AppError('Category already exists!')
       }
-    })
+
+      await this.categoriesRepository.create({
+        name,
+        description,
+      })
+    }
   }
 }
