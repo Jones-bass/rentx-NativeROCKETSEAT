@@ -1,3 +1,6 @@
+import { DataSource } from 'typeorm'
+import { SeederFactoryManager } from 'typeorm-extension'
+
 export interface ICreateUserDTO {
   name: string
   password: string
@@ -5,4 +8,6 @@ export interface ICreateUserDTO {
   driver_license: string
   id?: string
   avatar?: string
+  dataSource?: DataSource
+  factoryManager?: SeederFactoryManager
 }
