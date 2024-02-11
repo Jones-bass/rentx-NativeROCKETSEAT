@@ -1,4 +1,4 @@
-import { SpecificationsRepository } from '@modules/cars/repositories/SpecificationsRepository'
+import { SpecificationsRepositoryInMemory } from '@modules/cars/repositories/in-memory/SpecificationsRepositoryInMemory'
 import { AppError } from '@shared/errors/AppError'
 import { inject, injectable } from 'tsyringe'
 
@@ -11,7 +11,7 @@ interface IRequest {
 export class CreateSpecificationUseCase {
   constructor(
     @inject('SpecificationsRepository')
-    private specificationRepository: SpecificationsRepository,
+    private specificationRepository: SpecificationsRepositoryInMemory,
   ) {}
 
   async execute({ description, name }: IRequest): Promise<void> {

@@ -1,13 +1,15 @@
 import { AppDataSource } from 'data-source'
-import { Specification } from '../entities/Specification'
+import { In, Repository } from 'typeorm'
 
-import { Repository } from 'typeorm'
 import {
   ICreateSpecificationDTO,
   ISpecificationsRepository,
-} from '../dtos/ISpecificationsRepository'
+} from '../ISpecificationsRepository'
+import { Specification } from '@modules/cars/entities/Specification'
 
-export class SpecificationsRepository implements ISpecificationsRepository {
+export class SpecificationsRepositoryInMemory
+  implements ISpecificationsRepository
+{
   private repository: Repository<Specification>
 
   constructor() {
@@ -31,5 +33,15 @@ export class SpecificationsRepository implements ISpecificationsRepository {
   async findByName(name: string): Promise<Specification> {
     const specification = await this.repository.findOne({ where: { name } })
     return specification
+  }
+
+  async findByIds(ids: string[]): Promise<Specification[]> {
+    const allSpecifications = await this.repository.find({
+      where: {
+        id: In(ids),
+      },
+    })
+
+    return allSpecifications
   }
 }

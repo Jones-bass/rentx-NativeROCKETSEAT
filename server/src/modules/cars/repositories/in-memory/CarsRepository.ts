@@ -1,10 +1,10 @@
 import { Repository } from 'typeorm'
 
-import { Car } from '../entities/Car'
-import { ICarsRepository, ICreateCarDTO } from '../dtos/ICarsRepository'
 import { AppDataSource } from 'data-source'
+import { ICarsRepository, ICreateCarDTO } from '../ICarsRepository'
+import { Car } from '@modules/cars/entities/Car'
 
-class CarsRepository implements ICarsRepository {
+export class CarsRepository implements ICarsRepository {
   private repository: Repository<Car>
 
   constructor() {
@@ -86,5 +86,3 @@ class CarsRepository implements ICarsRepository {
       .execute()
   }
 }
-
-export { CarsRepository }

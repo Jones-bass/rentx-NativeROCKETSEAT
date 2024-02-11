@@ -3,14 +3,14 @@ import { container } from 'tsyringe'
 import { UsersRepository } from '@modules/accounts/infra/typeorm/repositories/UsersRepository'
 import { IUsersRepository } from '@modules/accounts/infra/typeorm/repositories/IUsersRepository'
 
-import { CategoriesRepository } from '@modules/cars/repositories/CategoriesRepository'
-import { ICategoriesRepository } from '@modules/cars/dtos/ICategoriesRepository'
+import { CategoriesRepository } from '@modules/cars/repositories/in-memory/CategoriesRepository'
+import { ICategoriesRepository } from '@modules/cars/repositories/ICategoriesRepository'
 
-import { SpecificationsRepository } from '@modules/cars/repositories/SpecificationsRepository'
-import { ISpecificationsRepository } from '@modules/cars/dtos/ISpecificationsRepository'
+import { SpecificationsRepositoryInMemory } from '@modules/cars/repositories/in-memory/SpecificationsRepositoryInMemory'
+import { ISpecificationsRepository } from '@modules/cars/repositories/ISpecificationsRepository'
 
-import { CarsRepository } from '@modules/cars/repositories/CarsRepository'
-import { ICarsRepository } from '@modules/cars/dtos/ICarsRepository'
+import { CarsRepository } from '@modules/cars/repositories/in-memory/CarsRepository'
+import { ICarsRepository } from '@modules/cars/repositories/ICarsRepository'
 
 container.registerSingleton<ICategoriesRepository>(
   'CategoriesRepository',
@@ -19,7 +19,7 @@ container.registerSingleton<ICategoriesRepository>(
 
 container.registerSingleton<ISpecificationsRepository>(
   'SpecificationsRepository',
-  SpecificationsRepository,
+  SpecificationsRepositoryInMemory,
 )
 
 container.registerSingleton<IUsersRepository>(

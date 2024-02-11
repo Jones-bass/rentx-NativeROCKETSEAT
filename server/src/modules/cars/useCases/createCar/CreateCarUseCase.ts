@@ -1,5 +1,5 @@
-import { ICarsRepository } from '@modules/cars/dtos/ICarsRepository'
 import { Car } from '@modules/cars/entities/Car'
+import { ICarsRepository } from '@modules/cars/repositories/ICarsRepository'
 import { AppError } from '@shared/errors/AppError'
 import { inject, injectable } from 'tsyringe'
 
