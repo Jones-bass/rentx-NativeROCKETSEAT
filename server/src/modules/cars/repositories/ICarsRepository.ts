@@ -1,5 +1,5 @@
-import { Car } from '../entities/Car'
-import { Specification } from '../entities/Specification'
+import { Car } from '../infra/typeorm/entities/Car'
+import { Specification } from '../infra/typeorm/entities/Specification'
 
 export interface ICreateCarDTO {
   name: string

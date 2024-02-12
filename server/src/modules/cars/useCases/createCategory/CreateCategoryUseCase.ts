@@ -1,4 +1,4 @@
-import { CategoriesRepository } from '@modules/cars/repositories/in-memory/CategoriesRepository'
+import { CategoriesRepository } from '@modules/cars/infra/typeorm/repositories/CategoriesRepository'
 import { AppError } from '@shared/errors/AppError'
 import { inject, injectable } from 'tsyringe'
 

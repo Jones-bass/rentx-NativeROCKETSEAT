@@ -1,8 +1,11 @@
 import { Repository } from 'typeorm'
 
 import { AppDataSource } from 'data-source'
-import { ICarsRepository, ICreateCarDTO } from '../ICarsRepository'
-import { Car } from '@modules/cars/entities/Car'
+import { Car } from '@modules/cars/infra/typeorm/entities/Car'
+import {
+  ICarsRepository,
+  ICreateCarDTO,
+} from '@modules/cars/repositories/ICarsRepository'
 
 export class CarsRepository implements ICarsRepository {
   private repository: Repository<Car>
