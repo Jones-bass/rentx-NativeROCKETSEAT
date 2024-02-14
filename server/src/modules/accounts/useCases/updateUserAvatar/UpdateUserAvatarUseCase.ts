@@ -1,5 +1,5 @@
-import { IUsersRepository } from '@modules/accounts/infra/typeorm/repositories/IUsersRepository'
-import { deleteFile } from '@shared/utils/file'
+import { IUsersRepository } from '../../../../modules/accounts/infra/typeorm/repositories/IUsersRepository'
+import { deleteFile } from '../../../../shared/utils/file'
 import { inject, injectable } from 'tsyringe'
 
 interface IRequest {

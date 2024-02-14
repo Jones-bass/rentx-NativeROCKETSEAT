@@ -1,6 +1,6 @@
-import { AppError } from '@shared/errors/AppError'
+import { AppError } from '../../../../shared/errors/AppError'
 import { inject, injectable } from 'tsyringe'
-import { SpecificationsRepositoryInMemory } from '@modules/cars/infra/typeorm/repositories/SpecificationsRepositoryInMemory'
+import { SpecificationsRepositoryInMemory } from '../../../../modules/cars/infra/typeorm/repositories/SpecificationsRepositoryInMemory'
 
 interface IRequest {
   name: string

@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 
 import express, { NextFunction, Request, Response } from 'express'
-import { AppError } from '@shared/errors/AppError'
+import { AppError } from './shared/errors/AppError'
 import 'express-async-errors'
 
 import { router } from './routes'

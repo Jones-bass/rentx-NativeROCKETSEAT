@@ -1,5 +1,5 @@
-import { CategoriesRepository } from '@modules/cars/infra/typeorm/repositories/CategoriesRepository'
-import { AppError } from '@shared/errors/AppError'
+import { CategoriesRepository } from '../../../../modules/cars/infra/typeorm/repositories/CategoriesRepository'
+import { AppError } from '../../../../shared/errors/AppError'
 import { inject, injectable } from 'tsyringe'
 
 interface IRequest {

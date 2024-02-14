@@ -1,8 +1,8 @@
 import { Repository } from 'typeorm'
 
 import { AppDataSource } from 'data-source'
-import { CarImage } from '@modules/cars/infra/typeorm/entities/CarImage'
-import { ICarsImagesRepository } from '@modules/cars/repositories/ICarsImagesRepository'
+import { CarImage } from '../../../../../modules/cars/infra/typeorm/entities/CarImage'
+import { ICarsImagesRepository } from '../../../../../modules/cars/repositories/ICarsImagesRepository'
 
 class CarsImagesRepository implements ICarsImagesRepository {
   private repository: Repository<CarImage>

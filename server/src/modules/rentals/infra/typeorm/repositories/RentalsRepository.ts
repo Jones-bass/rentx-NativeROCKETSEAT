@@ -1,7 +1,7 @@
-import { Repository } from 'typeorm'
+import { MoreThanOrEqual, Repository } from 'typeorm'
 
-import { ICreateRentalDTO } from '@modules/rentals/dtos/ICreateRentalDTO'
-import { IRentalsRepository } from '@modules/rentals/repositories/IRentalsRepository'
+import { ICreateRentalDTO } from '../../../../../modules/rentals/dtos/ICreateRentalDTO'
+import { IRentalsRepository } from '../../../../../modules/rentals/repositories/IRentalsRepository'
 import { Rental } from '../entities/Rental'
 import { AppDataSource } from 'data-source'
 
@@ -30,15 +30,40 @@ export class RentalsRepository implements IRentalsRepository {
     car_id,
     expected_return_date,
     user_id,
+    id,
+    end_date,
+    total,
   }: ICreateRentalDTO): Promise<Rental> {
     const rental = this.repository.create({
       car_id,
       expected_return_date,
       user_id,
+      id,
+      end_date,
+      total,
     })
 
     await this.repository.save(rental)
 
     return rental
+  }
+
+  async findById(id: string): Promise<Rental> {
+    const rental = await this.repository.findOne({ where: { id } })
+    return rental
+  }
+
+  async findOpenRentalByCarAndDate(
+    car_id: string,
+    date: Date,
+  ): Promise<Rental> {
+    const openByCarAndDate = await this.repository.findOne({
+      where: {
+        car_id,
+        end_date: null,
+        expected_return_date: MoreThanOrEqual(date),
+      },
+    })
+    return openByCarAndDate
   }
 }

@@ -1,11 +1,11 @@
 import { AppDataSource } from 'data-source'
 import { In, Repository } from 'typeorm'
 
-import { Specification } from '@modules/cars/infra/typeorm/entities/Specification'
+import { Specification } from '../../../../../modules/cars/infra/typeorm/entities/Specification'
 import {
   ICreateSpecificationDTO,
   ISpecificationsRepository,
-} from '@modules/cars/repositories/ISpecificationsRepository'
+} from '../../../../../modules/cars/repositories/ISpecificationsRepository'
 
 export class SpecificationsRepositoryInMemory
   implements ISpecificationsRepository
