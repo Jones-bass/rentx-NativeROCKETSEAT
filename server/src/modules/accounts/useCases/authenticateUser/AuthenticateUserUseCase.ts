@@ -1,8 +1,14 @@
-import { IUsersRepository } from '../../../../modules/accounts/infra/typeorm/repositories/IUsersRepository'
-import { AppError } from '../../../../shared/errors/AppError'
-import { compare } from 'bcrypt'
-import { sign } from 'jsonwebtoken'
 import { inject, injectable } from 'tsyringe'
+
+import { compare } from 'bcrypt'
+
+import auth from '../../../../config/auth'
+import { AppError } from '../../../../shared/errors/AppError'
+import { IUsersRepository } from '../../../../modules/accounts/repositories/IUsersRepository'
+import { IUsersTokensRepository } from '../../../../modules/accounts/repositories/IUsersTokensRepository'
+import { IDateProvider } from '../../../../shared/container/providers/DateProvider/IDateProvider'
+
+import { sign } from 'jsonwebtoken'
 
 interface IRequest {
   email: string
@@ -15,17 +21,29 @@ interface IResponse {
     email: string
   }
   token: string
+  refresh_token: string
 }
 
 @injectable()
-class AuthenticateUserUseCase {
+export class AuthenticateUserUseCase {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
+    @inject('UsersTokensRepository')
+    private usersTokensRepository: IUsersTokensRepository,
+    @inject('DayjsDateProvider')
+    private dateProvider: IDateProvider,
   ) {}
 
   async execute({ email, password }: IRequest): Promise<IResponse> {
     const user = await this.usersRepository.findByEmail(email)
+    const {
+      expires_in_token,
+      secret_refresh_token,
+      secret_token,
+      expires_in_refresh_token,
+      expires_refresh_token_days,
+    } = auth
 
     if (!user) {
       throw new AppError('Email or password incorrect!')
@@ -37,9 +55,24 @@ class AuthenticateUserUseCase {
       throw new AppError('Email or password incorrect!')
     }
 
-    const token = sign({}, 'e7ff0497d496f5f48201740a0860c8d3', {
+    const token = sign({}, secret_token, {
       subject: user.id,
-      expiresIn: '7d',
+      expiresIn: expires_in_token,
+    })
+
+    const refresh_token = sign({ email }, secret_refresh_token, {
+      subject: user.id,
+      expiresIn: expires_in_refresh_token,
+    })
+
+    const refresh_token_expires_date = this.dateProvider.addDays(
+      expires_refresh_token_days,
+    )
+
+    await this.usersTokensRepository.create({
+      user_id: user.id,
+      refresh_token,
+      expires_date: refresh_token_expires_date,
     })
 
     const tokenReturn: IResponse = {
@@ -48,10 +81,9 @@ class AuthenticateUserUseCase {
         name: user.name,
         email: user.email,
       },
+      refresh_token,
     }
 
     return tokenReturn
   }
 }
-
-export { AuthenticateUserUseCase }

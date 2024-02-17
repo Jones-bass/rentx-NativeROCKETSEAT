@@ -12,9 +12,9 @@
   $ yarn
 
   # Criar as migrations:
-  $ npx typeorm migration:create ./src/migrations/create
+  $ npx typeorm migration:create ./src/shared/migrations/create
 
-  # Rodar as migrations:
+  # Rodar as migrations
   $ yarn typeorm migration:run
 
   # Rodar a aplicação:
