@@ -4,3 +4,5 @@ DB_PASS=docker
 DB_NAME=rentx
 
 PORT=3333
+
+MAIL_PROVIDER=ethereal

@@ -1,6 +1,7 @@
 import { container } from 'tsyringe'
 
-import './providers'
+import './providers/DateProvider'
+import './providers/MailProvider'
 
 import { CategoriesRepository } from '../../modules/cars/infra/typeorm/repositories/CategoriesRepository'
 import { ICategoriesRepository } from '../../modules/cars/repositories/ICategoriesRepository'
